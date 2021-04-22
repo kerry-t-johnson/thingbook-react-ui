@@ -10,7 +10,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 function Navigation(props) {
 
     return (
-        <Navbar bg="dark" variant="dark" expand="lg">
+        <Navbar bg="dark" variant="dark" expand="lg" className="flex-fill">
             <Navbar.Brand href="/">ThingBook</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -19,7 +19,6 @@ function Navigation(props) {
                     <NavDropdown title="Browse" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/browse-datastreams">Datastreams</NavDropdown.Item>
                         <NavDropdown.Item href="/browse-organizations">Organizations</NavDropdown.Item>
-                        <NavDropdown.Item href="/browse-users">Users</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 <Form inline>
@@ -32,7 +31,6 @@ function Navigation(props) {
                         <Dropdown.Menu>
                             <Dropdown.Item href="#/action-1">Datastreams</Dropdown.Item>
                             <Dropdown.Item href="#/action-2">Organizations</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Users</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                     <Button variant="success" className="mr-sm-2">Search</Button>
