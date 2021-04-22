@@ -1,9 +1,9 @@
 import Card from 'react-bootstrap/Card';
 
-function OrganizationSummary(props) {
+function DatastreamSummary(props) {
     const { item } = props;
 
-    const selfUrl = `/organization/${encodeURIComponent(item?.links?.self?.href)}`;
+    const selfUrl = `/data-sharing/template/${encodeURIComponent(item?.links?.self?.href)}`;
 
     return (
         <div className="col">
@@ -19,4 +19,4 @@ function OrganizationSummary(props) {
     );
 }
 
-export default OrganizationSummary;
+export default DatastreamSummary;

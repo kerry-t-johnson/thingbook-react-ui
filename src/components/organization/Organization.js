@@ -1,14 +1,13 @@
-import Card from 'react-bootstrap/Card';
-import React from "react";
+import { Col, Row } from 'react-bootstrap';
+import Component from '../shared/component';
+import { fetchJson } from '../shared/utils';
+import OrganizationAgreements from './OrganizationAgreements';
+import OrganizationDetails from './OrganizationDetails';
 
-export default class Organization extends React.Component {
+export default class Organization extends Component {
 
     componentDidMount() {
-        const selfLink = decodeURIComponent(this.props?.match?.params?.selfLink ?? this.props.selfLink);
-
-        fetch(selfLink)
-            .then(response => response.json())
-            .then(this.onResponse.bind(this));
+        fetchJson(this.onResponse.bind(this), this.selfLink);
     }
 
     onResponse(data) {
@@ -25,15 +24,18 @@ export default class Organization extends React.Component {
         }
 
         return (
-            <div className="col">
-                <Card>
-                    <Card.Header as="h3">{self.name}</Card.Header>
-                    <Card.Body>
-                        <Card.Subtitle>{self.domainName}</Card.Subtitle>
-                        <Card.Text></Card.Text>
-                    </Card.Body>
-                    <Card.Footer></Card.Footer>
-                </Card>
+            <div>
+                <Row>
+                    <Col>
+                        <OrganizationDetails orgData={self} />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <h5>Data Sharing Agreements</h5>
+                        <OrganizationAgreements orgId={self._id} selfLink={self?.links?.agreement?.href} />
+                    </Col>
+                </Row>
             </div>
         );
     }
