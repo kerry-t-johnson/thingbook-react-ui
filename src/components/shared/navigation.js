@@ -16,12 +16,12 @@ function Navigation(props) {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <Nav.Link href="/">Home</Nav.Link>
-                    <NavDropdown title="Browse" id="basic-nav-dropdown">
+                    {/* <NavDropdown title="Browse" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/browse-datastreams">Datastreams</NavDropdown.Item>
                         <NavDropdown.Item href="/browse-organizations">Organizations</NavDropdown.Item>
-                    </NavDropdown>
+                    </NavDropdown> */}
                 </Nav>
-                <Form inline>
+                {/* <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                     <Dropdown as={ButtonGroup}>
                         <Button variant="outline-success" >Datastreams</Button>
@@ -34,7 +34,7 @@ function Navigation(props) {
                         </Dropdown.Menu>
                     </Dropdown>
                     <Button variant="success" className="mr-sm-2">Search</Button>
-                </Form>
+                </Form> */}
             </Navbar.Collapse>
         </Navbar>
     );
