@@ -5,12 +5,12 @@ FROM node:15.5-buster AS builder
 WORKDIR /opt/thingbook-react-ui
 
 # Install build rerequisites
-COPY ["package*.json", "npm-shrinkwrap.json*", "./"]
-RUN npm install --silent
+COPY ["package*.json", "*.lock*", "./"]
+RUN yarn install --frozen-lockfile --silent
 
 # Build
 COPY . .
-RUN npm run build
+RUN yarn build
 
 
 

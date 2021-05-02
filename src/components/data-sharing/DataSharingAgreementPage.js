@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Col, Row, Spinner, Table } from "react-bootstrap";
+import { Button, Col, Row, Spinner, Table } from "react-bootstrap";
 import * as io from 'socket.io-client';
 import { apiEndpoint, fetchJson, formatDateTime } from "../shared/utils";
 import DataSharingAgreement from "./DataSharingAgreement";
@@ -67,6 +67,18 @@ export default class DataSharingAgreementPage extends React.Component {
         this.setState({ agreement: data });
     }
 
+    onGenerateTestData() {
+        fetch(apiEndpoint('/api/v1/development/sensor-things-test-data'), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: this.state.agreement.producer.name,
+            })
+        });
+    }
+
     render() {
         const { agreement, image_type } = this.state;
 
@@ -82,18 +94,13 @@ export default class DataSharingAgreementPage extends React.Component {
                         </Col>
                         <Col>
                             <Row>
-                                {this.state.metrics.map((metric, index) => {
-                                    return (
-                                        <Col>
-                                            <Card>
-                                                <Card.Header as="h4">{metric.metrics.name}</Card.Header>
-                                                <Card.Text>
-                                                    Count: {metric.metrics.count}
-                                                </Card.Text>
-                                            </Card>
-                                        </Col>
-                                    );
-                                })}
+                                <Button
+                                    variant='primary'
+                                    size='lg'
+                                    block
+                                    onClick={this.onGenerateTestData.bind(this)}>
+                                    Generate test data
+                                </Button>
                             </Row>
                             <Row>
                                 {this.state.observations.length > 0 &&
@@ -101,7 +108,6 @@ export default class DataSharingAgreementPage extends React.Component {
                                         <thead>
                                             <tr>
                                                 <th>Phenomenon Time</th>
-                                                <th>Topic</th>
                                                 <th>Observation Value</th>
                                             </tr>
                                         </thead>
@@ -110,7 +116,6 @@ export default class DataSharingAgreementPage extends React.Component {
                                                 return (
                                                     <tr key={index}>
                                                         <td>{formatDateTime(observation.observation.phenomenonTime)}</td>
-                                                        <td>{observation.topic}</td>
                                                         <td>{observation.observation.result.toString()}</td>
                                                     </tr>
                                                 )
