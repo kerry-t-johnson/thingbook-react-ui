@@ -3,10 +3,10 @@ import { parse } from "fecha";
 export function apiEndpoint(path, query = {}) {
     let url = new URL(decodeURIComponent(path), process.env.REACT_APP_API_URI).href;
 
-    let querySeparator = '?';
-    for (const [key, value] in query) {
-        url = `${url}${querySeparator}${key}=${value}`;
-        querySeparator = '&';
+    let sep = '?';
+    for (const key in query) {
+        url = `${url}${sep}${key}=${query[key]}`;
+        sep = '&';
     }
 
     return url;
@@ -37,7 +37,6 @@ export function formatDate(dateStringOrObject) {
 }
 
 export function formatDateTime(dateTimeStringOrObject) {
-    console.log(typeof dateTimeStringOrObject);
     try {
         const dateObject = (typeof dateTimeStringOrObject === 'string') ? parse(dateTimeStringOrObject, 'isoDateTime') : dateTimeStringOrObject;
 
